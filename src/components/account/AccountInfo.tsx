@@ -125,7 +125,7 @@ const AccountInfo = () => {
   
     if (  (pathname.split('/').pop() || '') !== '' ) {
      
-      const userInformation = async () => {
+      const userInformation2 = async () => {
         const address = pathname.split('/').pop() || '';
       
         const balanceNFT = await getNftsOfOwner(address);
@@ -171,17 +171,17 @@ const AccountInfo = () => {
         });
       };
   
-      userInformation().catch(console.error);
+      userInformation2().catch(console.error);
   
   
     } 
 
-  if (primaryWallet  ) {
-      userInformation().catch(console.error);
-    }
+  // if (isAuthenticated &&  (pathname.split('/').pop() || '') !== primaryWallet.address  ) {
+  //     userInformation().catch(console.error);
+  //   }
 
 
-  }, [primaryWallet]);
+  }, [primaryWallet, isAuthenticated]);
   
 
 
@@ -244,6 +244,8 @@ useEffect(() => {
   
 }, [completedClaims]);
 
+=======
+
 
 
 useEffect(() => {
@@ -251,6 +253,18 @@ useEffect(() => {
   console.log("NFT Details:::", nftDetails?.length)
   setPoidhScore(Number(poidhScore));
 }, [completedBounties, inProgressBounties, nftDetails, primaryWallet]);
+
+
+
+
+  
+
+
+useEffect(() => {
+  let poidhScore = (totalETHEarn * 1000) + (totalETHPaid * 1000) + ((nftDetails?.length ?? 0) * 10);
+  console.log("NFT Details:::", nftDetails?.length)
+  setPoidhScore(Number(poidhScore));
+}, [completedBounties, inProgressBounties, nftDetails, totalETHEarn, totalETHPaid,primaryWallet]);
 
 
 
@@ -267,6 +281,11 @@ const handleFilterButtonClick = (section: string) => {
 
 
 
+
+
+console.log( "AAAA:" , isAuthenticated)
+console.log( "AAAADDD:" , address)
+=======
 
 
 
@@ -383,8 +402,6 @@ const handleFilterButtonClick = (section: string) => {
               </div>
             )}
           </div>
-
-
      </div>
     )
     }
